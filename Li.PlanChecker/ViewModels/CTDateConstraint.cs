@@ -16,13 +16,6 @@ namespace Li.PlanChecker.ViewModels
             var pq = new PQAsserter(pi);
             return pq.HasImage().CumulativeResult;
         }
-
-        public ConstraintResult Constrain(PlanningItem pi)
-        {
-            var image = pi.GetImage();
-            return Constrain(new F.Image(image));
-        }
-
         public ConstraintResult Constrain(F.Image image)
         {
             var diffDays = (DateTime.Now - image.CreationDateTime).Value.TotalDays;
@@ -37,6 +30,13 @@ namespace Li.PlanChecker.ViewModels
                 return new ConstraintResult(this, ResultType.ACTION_LEVEL_3, msg);
             }
         }
+        public ConstraintResult Constrain(PlanningItem pi)
+        {
+            var image = pi.GetImage();
+            return Constrain(new F.Image(image));
+        }
+
+
     }
 
 }
